@@ -21,14 +21,13 @@ Profile
 	      		<div class="modal-body">
 	        		<div class="row">
 	        			<div class="col-md-6">
-	        				<button class="btn btn-lg btn-primary githublink">
+	        				<a href="/addgithub/" class="btn btn-lg btn-primary">
 	        					{% if profile.is_github_connected %}
-	        					<span class="glyphicon glyphicon-ok"></span>
+	        					<span class="glyphicon glyphicon-ok"></span>Github Profile Linked
 	        					{% else %}
-	        					<span class="glyphicon glyphicon-remove"></span>
-	        					{% endif %}
-	        					Link my GitHub Profile
-	        				</button>
+	        					<span class="glyphicon glyphicon-remove"></span>Link Github Profile
+	        					{% endif %}        					
+	        				</a>
 	        			</div>
 	        			<!-- <div class="col-md-6">
 	        				<button class="btn btn-lg btn-primary bitbucketlink">
