@@ -20,11 +20,11 @@ Profile
 	     		</div>
 	      		<div class="modal-body">
 	        		<div class="row">
-	        			<div class="col-md-6">
-	        				<a href="/addgithub/" class="btn btn-lg btn-primary">
-	        					{% if profile.is_github_connected %}
-	        					<span class="glyphicon glyphicon-ok"></span>Github Profile Linked
-	        					{% else %}
+	        			<div class="col-md-6">        				
+        					{% if profile.is_github_connected %}
+	        					<button class="btn btn-lg btn-success"><span class="glyphicon glyphicon-ok"></span> Github Profile Linked</button>
+        					{% else %}
+        					<a href="/addgithub/" class="btn btn-lg btn-primary">
 	        					<span class="glyphicon glyphicon-remove"></span>Link Github Profile
 	        					{% endif %}        					
 	        				</a>
