@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>
+		
+		{% block meta_title %}
+			Home
+		{% endblock %}
+
+		{% block title %}
+		| Doghustle
+		{% endblock %}
+
+	</title>
+
+	<!-- CSS Stylesheets -->
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">	
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/3.0.0/amelia/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+	<!-- JS Libraries -->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+	<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/13.1.7/js/dx.chartjs.js"></script>
+
+	<style type="text/css">
+		.title{
+			background-color: firebrick;
+			color:black;			
+		}
+		.title img{
+			margin-left: -1em;
+			margin-top: -0.75em;
+		}
+		.edu{
+			padding: 1em;
+			font-size: 1.25em;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			/*background-color: royalblue;*/
+			/*margin-left:1em;*/
+		}
+		.outerborder{
+			padding: 1em;
+			background-color: moccasin;
+			/*border: 1px solid;
+			border-color: burlywood;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;*/
+		}
+		.setitem{
+			line-height: 2em;
+			font-size: 1.25em;
+		}
+		.projectitem{
+			line-height: 2em;
+			font-size: 1.25em;
+		}
+		body{
+			background: url('../static/3.png');
+			color:black;
+					}
+		h1,h2,h3,h4,h5,h6{
+			font-family: 'Roboto Slab', serif;
+		}
+		.modal-content {background-color: white;}
+		.well{
+			background-color: firebrick;
+			color:white;
+		}
+		a{
+			color:white;
+			text-decoration:none;
+		}
+		a:hover,a:focus{
+			color:black;
+			text-decoration:none;
+
+		}
+		.about{
+			font-size: 1.25em;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		$(function(){
+
+			$('.githublink').click(function(){
+				window.open('/addgithub/');
+			});
+			$('.closegithub').click(function(){
+				window.close();
+			});
+			var githubds = [
+			    {{ dnut_values|safe }}
+			];			
+
+			$("#github").dxPieChart({
+			    dataSource: githubds,
+			    title: "LOC of Programming Languages used in Github Projects",
+				tooltip: {
+					enabled: true,
+					format:"thousands",
+					percentPrecision: 2,
+					customizeText: function() { 
+						return this.valueText + " - " + this.percentText;
+					}
+				},
+				legend: {
+					horizontalAlignment: "right",
+					verticalAlignment: "top",
+					margin: 0
+				},
+				series: [{
+					type: "doughnut",
+					argumentField: "language",
+					label: {
+						visible: true,
+						format: "thousands",
+						connector: {
+							visible: true
+						}
+					}
+				}]
+			});
+
+
+		});
+
+	</script>
+
+</head>
+<body>
+	<div class="navbar navbar-default">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <a class="navbar-brand" href="/">
+	                {% if settings.SITE_TITLE %}
+	                    {{ settings.SITE_TITLE }} 
+	                {% else %}
+	                    Doghustle
+	                {% endif %}
+	            </a>
+	        </div>
+	        <div class="navbar-collapse navbar-responsive-collapse">
+	            	            
+		            <ul class="nav navbar-nav navbar-right">
+		                <li class="active"><a href="/">Home</a></li>
+		                <li><a data-toggle="modal" href="#about">About</a></li>
+		                {% block menu %}
+		                {% endblock %}     
+		            </ul>
+	        	
+	        </div><!-- /.nav-collapse -->
+	    </div><!-- /.container -->
+	</div>
+	<div class="container">
+		<div id="about" class="modal fade" style="display:none;">
+		  	<div class="modal-dialog" role="dialog">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        		<h4 class="modal-title">About Doghustle</h4>
+		     		</div>
+		      		<div class="modal-body">
+		        		<h1>About Doghustle</h1>
+		        		<p>
+		        			Let me explain how doghustle came to life by a small story:
+		        		</p>
+		        		<p>
+		        			One day a young man who was sick and tired of his day job wanted to shift gears and apply for startups.
+		        			Being a programmer by specialization, he wanted to learn something new and started experimenting with 
+		        			programming languages.He slowly started coding small projects,which gradually increased in size. He was slowly increasing his skillset and day after day, his confidence started increasing. He had many demo projects whose source code was hosted at GitHub/Bitbucket. He was now ready to face the startup world.
+		        		</p>
+		        		<p>
+		        			He started applying to all jobs he found interesting and he was getting a good response too. But they all asked him his Linkedin Profile,Github Profile and his demo project's URL's.
+		        		</p>
+		        		<p>He patiently started filling in the forms,giving all the social account details and explaining how 'XYZ' project was done and why it was not hosted yet.</p>
+		        		<p>He started spending more time updating his resume than doing what he loved doing - CODING !</p>
+		        		<p>Needless to say, he was frustrated. Then he wondered whether his fellow coding heroes faced the same problem he was facing.</p>
+		        		<p>And the rest as they say is History. This is the origin of Doghustle.</p>
+
+		        		<p><b><i>Please note that only the Github Integration has been done till now. Will work on the BitBucket integration as well.</i></b></p>
+		      		</div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-default" data-dismiss="modal">Ohhhhhh !!!!!</button>	        		
+		      		</div>
+		    	</div><!-- /.modal-content -->
+		  	</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		{% block content %}
+		
+		{% endblock %}
+	</div>
+	<br>
+	<div class="footer">
+		<div class="container" align="center">
+			<p class="well well-sm">Made with Django & Love by <a href="http://www.dissonance.me">Vijay Sharma Yellepeddi</a></p>
+		</div>
+	</div>
+</body>
+</html>

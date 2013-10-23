@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block meta_title %}
+Profile
+{% endblock %}
+
+{% block menu %}
+<li><a data-toggle="modal" href="#linkaccts">Link Accounts</a></li>
+<li><a href="/logout/">Logout</a></li>
+{% endblock %}
+
+{% block content %}
+	
+	<div id="linkaccts" class="modal fade" style="display:none;">
+	  	<div class="modal-dialog" role="dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title">Link your GitHub and/or Bitbucket Profiles</h4>
+	     		</div>
+	      		<div class="modal-body">
+	        		<div class="row">
+	        			<div class="col-md-6">
+	        				<button class="btn btn-lg btn-primary githublink">
+	        					{% if profile.is_github_connected %}
+	        					<span class="glyphicon glyphicon-ok"></span>
+	        					{% else %}
+	        					<span class="glyphicon glyphicon-remove"></span>
+	        					{% endif %}
+	        					Link my GitHub Profile
+	        				</button>
+	        			</div>
+	        			<!-- <div class="col-md-6">
+	        				<button class="btn btn-lg btn-primary bitbucketlink">
+	        					{% if profile.is_bitbucket_connected %}
+	        					<span class="glyphicon glyphicon-ok"></span>
+	        					{% else %}
+	        					<span class="glyphicon glyphicon-remove"></span>
+	        					{% endif %}
+	        					Link my Bitbucket Profile
+	        				</button>
+	        			</div> -->
+	        		</div>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">I am good</button>	        		
+	      		</div>
+	    	</div><!-- /.modal-content -->
+	  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+	<div class="container outerborder">
+		<div class="jumbotron title" align="center">
+			<img class="pull-left" height=200 src="{{ linkedin_profile_data.pictureUrls.values.0 }}" alt="">
+			<h1>{{ linkedin_profile_data.firstName }} {{ linkedin_profile_data.lastName }}</h1>
+			<h3>{{ linkedin_profile_data.headline }}</h3>
+			<h4><a href="mailto:{{ linkedin_profile_data.emailAddress }}">{{ linkedin_profile_data.emailAddress }}</a></a> 
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-9">
+				<h3 class="well well-sm">Education & Experience</h3>
+				{% for edu in linkedin_profile_data.educations.values %}
+					<p class='edu'>
+						<b>
+							{% if edu.degree and edu.fieldOfStudy %}
+								{{ edu.degree }} in {{ edu.fieldOfStudy }} at {{ edu.schoolName }}
+							{% else %}
+								{{ edu.schoolName }}
+							{% endif %}
+						</b>
+						<br>	
+						<i>{{ edu.startDate.year }}-{{ edu.endDate.year }}</i>
+					</p>
+				{% endfor %}				
+			</div>
+			<div class="col-md-3">
+				<h3 class="well well-sm">Skills</h3>
+				<p class="setitem">	
+					{% for skill in linkedin_profile_data.skills.values %}
+						<span class="label label-info">{{ skill.skill.name }}</span>								
+					{% endfor %}
+				</p>
+			</div>			
+		</div>
+		<div class="row">			
+			<div class="col-md-9">
+				<h3 class="well well-sm">Programming Statistics</h3>
+				<div id="github" style="width: 100%; height: 440px;"></div>
+				{# <br><div id="bitbucket" style="width: 100%; height: 440px;"></div> #}
+			</div>
+			<div class="col-md-3">
+				<h3 class="well well-sm">Projects</h3>
+				<p class="projectitem">
+					{% for repo in repos %}
+						<a href="https://github.com/{{ github_user }}/{{ repo.name }}/"><span class="label label-info">{{ repo.name|capfirst }}</span></a>
+					{% endfor %}					
+				</p>
+			</div>
+		</div>
+			
+{% endblock %}

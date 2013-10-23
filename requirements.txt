@@ -1,0 +1,11 @@
+Django==1.5.4
+MySQL-python==1.2.3
+South==0.8.2
+django-admin-bootstrapped==0.4.3
+django-bootstrap-toolkit==2.15.0
+django-cumulus==1.0.10
+django-social-auth==0.7.25
+django-tastypie==0.10.0
+django-taggit==0.10
+gunicorn==17.5
+pyrax==1.4.10

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block meta_title %}
+	Regular Login
+{% endblock %}
+
+{% block content %}
+	<h1 align="center">Authentication</h1><br>
+	<div class="row">
+
+		<div class="col-md-6">
+			<form action="/auth/" method="POST">
+				<h4 class="well well-sm" align='center'>Existing Users Signin</h4>
+				<br>
+				{% csrf_token %}
+				{% for field in authform %}
+					<p>{{ field }}</p>
+				{% endfor %}
+				<br>
+				<input type="checkbox" /><p style="margin-left:1.75em;margin-top: -1.75em;">Remember Me</a>
+				<a href="/passreset/" class="pull-right">Forgot Password?</a>
+				<br>
+				<center>
+					<button class="btn btn-large btn-primary" type="submit">
+						Sign In
+					</button>
+				</center>
+			</form>
+		</div>
+
+		<div class="col-md-6">
+			<form action="/register/" method="POST">
+				<h4 class="well well-sm" align='center'>New Users SignUp</h4>
+				<br>
+				{% csrf_token %}
+				{% for field in form %}
+					<p>{{ field }}</p>
+				{% endfor %}
+				<br>
+				<input type="checkbox" /><p style="margin-left:1.75em;margin-top: -1.75em;">I Agree to all the <a href="/tac/">Terms & Conditions</a> of this site</p>
+				<br>
+				<center>
+					<button class="btn btn-large btn-primary" type="submit">
+						Sign Up
+					</button>
+				</center>
+			</form>
+		</div>
+		
+	</div>
+
+{% endblock %}
